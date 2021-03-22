@@ -1,7 +1,5 @@
 "use strict";
 
-exports.maxOfThree=maxOfThree;
-exports.findLongestWord=findLongestWord;
 
 
 /**
