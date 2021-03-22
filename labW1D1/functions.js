@@ -51,16 +51,18 @@ function multiply(arr){
 
 /**
  * @param (String) of sentences
- * @returns longest length of word in string
+ * @returns  result longest length of word in string
  */
 function findLongestWord(str)
 {
-   new arr= str.split(" ")
-    max=arr[0].length;
-    for(let i=0;i<arr.length;i++)
-    {
-      if(max>arr[0].length)
-      max=arr[i];
+    
+        let result = str[0];
+        str = str.split(' ');
+    
+        for (let i = 1; i < str.length; i++) {
+            if (str[i].length > result.length) {
+                result = str[i];
+            }
+        }
+        return result;
     }
-    return arr[i];
-}
