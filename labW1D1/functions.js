@@ -1,5 +1,6 @@
 "use strict";
 
+exports.maxOfThree=maxOfThree;
 
 
 /**
@@ -45,4 +46,20 @@ function multiply(arr){
      }
     return tot;
 
+}
+
+/**
+ * @param (String) of sentences
+ * @returns longest length of word in string
+ */
+function findLongestWord(str)
+{
+   new arr= str.split(" ")
+    max=arr[0].length;
+    for(let i=0;i<arr.length;i++)
+    {
+      if(max>arr[0].length)
+      max=arr[i];
+    }
+    return arr[i];
 }
