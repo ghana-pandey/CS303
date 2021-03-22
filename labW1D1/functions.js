@@ -10,6 +10,11 @@
  * @returns {number} largest of a, b, c
  */
 function maxOfThree(a, b, c){ 
+    if(a>b &&a >c)
+    return a;
+    else if(b>a && b> c)
+    return b
+    else
     return c;
 }
 
@@ -20,6 +25,10 @@ function maxOfThree(a, b, c){
  */
 function sum(arr){
     let tot = 0;
+    for(let i=0;i<arr.length;i++){
+        tot=tot+arr[i];
+    }
+
 
     return tot;
 }
@@ -31,7 +40,9 @@ function sum(arr){
  */
 function multiply(arr){
     let tot = 1;
-
+     for(let i=0;i<arr.length;i++){
+         tot=tot*arr[i];
+     }
     return tot;
 
 }
