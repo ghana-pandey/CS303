@@ -81,7 +81,7 @@ function reverseArray(arr)
  * @param array of any word or sentence
  * @return same array as reverse
  */
-function reverseArrayInplace(arr)
+function reverseArrayInPlace(arr)
 {
     let leftIndex=0;
     let rightIndex=arr.length;
@@ -96,3 +96,26 @@ function reverseArrayInplace(arr)
     return arr;
 
 }
+
+/**
+ * @param student marks as array and correct as array
+ * @ return new array with student marks
+ */
+function scoreExams(studentAnswers, correctAnswers)
+{
+    let score=[];
+    for(let i=0;i<studentAnswers.length;i++)
+   
+    {
+        let marks=0;
+       for(let j=0;j<arr[i].length;j++)
+       {
+           if(arr[i][j]==arr[j])
+           marks++;
+       }
+       score.push(marks);
+    }
+    return score;
+}
+
+
