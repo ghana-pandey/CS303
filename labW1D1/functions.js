@@ -62,3 +62,37 @@ function findLongestWord(arr){
     }}
     return longWord;
 }
+
+/**
+ * @param array of any word or sentence
+ * @returns new array with reverse of original array
+ */
+function reverseArray(arr)
+{
+    let rev=[];
+    for(let i=arr.length-1;i>=0;i++)
+    {
+        rev.push(arr[i]);
+    }
+    return rev;
+}
+
+/**
+ * @param array of any word or sentence
+ * @return same array as reverse
+ */
+function reverseArrayInplace(arr)
+{
+    let leftIndex=0;
+    let rightIndex=arr.length;
+    while(leftIndex<rightIndex)
+    {
+        let temp=arr[leftIndex]
+        arr[leftIndex]=arr[rightIndex]
+        arr[rightIndex]=temp
+        leftIndex++;
+        rightIndex--;
+    }
+    return arr;
+
+}
