@@ -12,15 +12,15 @@ let library = [
  * Event handler to display library titles sorted alphabetically
  * @returns {undefined}
  */
-                    function showTitles() {
+                  //  function showTitles() {
                         /* put all titles into an array, then sort, then join with newline and insert in textarea innerHTML */
                         const titles = findTitles();
                         /*need to sort and then join the titles still (e.g., someArray.join("\n")  */
-                        titles.sort();
-                        const titleString = titles.join("\n");
-                        let textArea = document.getElementById("displayArea");
-                        textArea.innerHTML = titleString;
-                    }
+                        //titles.sort();
+                        //const titleString = titles.join("\n");
+                        //let textArea = document.getElementById("displayArea");
+                        //textArea.innerHTML = titleString;
+                   // }
 
 /**
  * @returns {undefined}
@@ -99,3 +99,6 @@ function makeBook(author, title, libraryID) {
                 return libraryID;
             }
 
+/**
+ * create object that has method take parameter
+ */
