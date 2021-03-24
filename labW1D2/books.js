@@ -1,35 +1,126 @@
+
+
+
+/* eslint-disable id-length */
+/* eslint-disable no-unused-vars */
+
 "use strict";
 
 let library = [
-    { title: "The Road Ahead", author: "Bill Gates", libraryID: 1254 },
-    { title: "Walter Isaacson", author: "Steve Jobs", libraryID: 4264 },
-    { title: "Mockingjay: The Final Book of The Hunger Games", author: "Suzanne Collins", libraryID: 3245 }
+  { title: "The Road Ahead", author: "Bill Gates", libraryID: 1254 },
+  { title: "Walter Isaacson", author: "Steve Jobs", libraryID: 4264 },
+  {
+    title: "Mockingjay: The Final Book of The Hunger Games",
+    author: "Suzanne Collins",
+    libraryID: 3245,
+  },
 ];
-
-/**
- * Event handler to display library titles sorted alphabetically
- * @returns {undefined}
+/**This function add new books to the library
+ *
+ * @returns{object} return and add a new object to the library
  */
-function showTitles() {
+function addBook() {
+  let book = {};
+  book.title = document.getElementById("new_title").value;
+  book.author = document.getElementById("new_author").value;
+  book.libraryID = +document.getElementById("new_id").value;
 
-    /* put all titles into an array, then sort, then join with newline and insert in textarea innerHTML */
-
-    const titles = findTitles();
-
-    /*need to sort and then join the titles still (e.g., someArray.join("\n")  */
-    titles.sort();
-    const titleString = titles.join("\n");
-
-    let textArea = document.getElementById("displayArea");
-    textArea.innerHTML = titleString;
+  library.push(book);
 }
-
-/**
- * 
- * @return {object} array holding all titles as elements
+/**This function show titles of the books sorted alphabetically
+ *
+ * @returns{string} display the title of the books to the html page sorted alphabetically
  */
 function findTitles() {
-    let titles = [];
-    // implement this and other functions
-    return titles;
+  let allTitles = "";
+  let tempArr = [];
+  for (let i = 0; i < library.length; i++) {
+    tempArr[i] = library[i].title;
+  }
+  tempArr.sort(function (a, b) {
+    //this function sorts the titles aplphabetically and ignore upper case and lower case
+    let x = a.toLowerCase();
+    let y = b.toLowerCase();
+    if (x < y) {
+      return -1;
+    }
+    if (y < x) {
+      return 1;
+    }
+    return 0;
+  });
+  for (let j = 0; j < tempArr.length; j++) {
+    let newLine = "\r\n";
+    allTitles += tempArr[j];
+    allTitles += newLine;
+  }
+  allTitles = allTitles.trim(); //trim all the space in allTitles
+  let textArea = document.getElementById("information");
+  textArea.innerHTML = allTitles;
 }
+/**This function show authors of the books sorted alphabetically
+ *
+ * @returns{string} display the authors of the books to the html page sorted alphabetically
+ */
+function findAuthors() {
+  let allAuthors = "";
+  let tempArr = [];
+  for (let i = 0; i < library.length; i++) {
+    tempArr[i] = library[i].author;
+  }
+  tempArr.sort(function (a, b) {
+    //this function sorts the authors aplphabetically and ignore upper case and lower case
+    let x = a.toLowerCase();
+    let y = b.toLowerCase();
+    if (x < y) {
+      return -1;
+    }
+    if (y < x) {
+      return 1;
+    }
+    return 0;
+  });
+  for (let j = 0; j < tempArr.length; j++) {
+    let newLine = "\r\n";
+    allAuthors += tempArr[j];
+    allAuthors += newLine;
+  }
+  allAuthors = allAuthors.trim(); //trim all the space in allAuthors
+  let textArea = document.getElementById("information");
+  textArea.innerHTML = allAuthors;
+}
+/**This function show library ID of the books, sorted
+ *
+ * @returns{number} display the sorted ID of the books to the html page
+ */
+function findIDs() {
+  let allID = "";
+  let tempArr = [];
+  for (let i = 0; i < library.length; i++) {
+    tempArr[i] = library[i].libraryID;
+  }
+  tempArr.sort(function (a, b) {
+    //this function convert library id into number sorts the id from small to large
+    let x = +a;
+    let y = +b;
+    if (x < y) {
+      return -1;
+    }
+    if (y < x) {
+      return 1;
+    }
+    return 0;
+  });
+  for (let j = 0; j < tempArr.length; j++) {
+    if (tempArr[j] !== 0) {
+      //When the user enter an empty author or book title the library ID still count as 0, this will remove all that 0 library ID
+      let newLine = "\r\n";
+      allID += tempArr[j];
+      allID += newLine;
+    }
+  }
+
+  let textArea = document.getElementById("information");
+  textArea.innerHTML = allID;
+}
+
