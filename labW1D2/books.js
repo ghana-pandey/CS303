@@ -1,126 +1,101 @@
-
-
-
-/* eslint-disable id-length */
-/* eslint-disable no-unused-vars */
-
 "use strict";
+/* You need the module.exports when testing in node.  Comment it out when you send your file to the browser */
+// module.exports = { findTitles, findAuthors, addBook , findIDs }; //add all of your function names here that you need for the node mocha tests
 
 let library = [
-  { title: "The Road Ahead", author: "Bill Gates", libraryID: 1254 },
-  { title: "Walter Isaacson", author: "Steve Jobs", libraryID: 4264 },
-  {
-    title: "Mockingjay: The Final Book of The Hunger Games",
-    author: "Suzanne Collins",
-    libraryID: 3245,
-  },
+    { title: "The Road Ahead", author: "Bill Gates", libraryID: 1254 },
+    { title: "Walter Isaacson", author: "Steve Jobs", libraryID: 4264 },
+    { title: "Mockingjay: The Final Book of The Hunger Games", author: "Suzanne Collins", libraryID: 3245 }
 ];
-/**This function add new books to the library
- *
- * @returns{object} return and add a new object to the library
- */
-function addBook() {
-  let book = {};
-  book.title = document.getElementById("new_title").value;
-  book.author = document.getElementById("new_author").value;
-  book.libraryID = +document.getElementById("new_id").value;
 
-  library.push(book);
-}
-/**This function show titles of the books sorted alphabetically
- *
- * @returns{string} display the title of the books to the html page sorted alphabetically
+/**
+ * Event handler to display library titles sorted alphabetically
+ * @returns {undefined}
  */
-function findTitles() {
-  let allTitles = "";
-  let tempArr = [];
-  for (let i = 0; i < library.length; i++) {
-    tempArr[i] = library[i].title;
-  }
-  tempArr.sort(function (a, b) {
-    //this function sorts the titles aplphabetically and ignore upper case and lower case
-    let x = a.toLowerCase();
-    let y = b.toLowerCase();
-    if (x < y) {
-      return -1;
-    }
-    if (y < x) {
-      return 1;
-    }
-    return 0;
-  });
-  for (let j = 0; j < tempArr.length; j++) {
-    let newLine = "\r\n";
-    allTitles += tempArr[j];
-    allTitles += newLine;
-  }
-  allTitles = allTitles.trim(); //trim all the space in allTitles
-  let textArea = document.getElementById("information");
-  textArea.innerHTML = allTitles;
+                    function showTitles() {
+                        /* put all titles into an array, then sort, then join with newline and insert in textarea innerHTML */
+                        const titles = findTitles();
+                        /*need to sort and then join the titles still (e.g., someArray.join("\n")  */
+                        titles.sort();
+                        const titleString = titles.join("\n");
+                        let textArea = document.getElementById("displayArea");
+                        textArea.innerHTML = titleString;
+                    }
+
+/**
+ * @returns {undefined}
+ */
+function addBrowserBook() {
+    const authorTxtbox = document.getElementById("title");
+    const author = authorTxtbox.value;
+    const newBrowserBook = { author: author, title: "foo", id: "123" };
+    addBook(newBrowserBook);
+    return;
 }
-/**This function show authors of the books sorted alphabetically
- *
- * @returns{string} display the authors of the books to the html page sorted alphabetically
+
+/**
+ * 
+ * @return {object} array holding all titles as elements
+ */
+                    function findTitles() {
+                        let titles = [];
+                        for (const book of library) {
+                            titles.push(book.title);
+                        }
+                        titles.sort();
+                        // titles = ["Mockingjay: The Final Book of The Hunger Games", "The Road Ahead", "Walter Isaacson"];  //FIX THIS!!
+                        // implement this and other functions
+                        return titles;
+                    }
+
+/**
+ * @returns {Array} of all the authors in library
  */
 function findAuthors() {
-  let allAuthors = "";
-  let tempArr = [];
-  for (let i = 0; i < library.length; i++) {
-    tempArr[i] = library[i].author;
-  }
-  tempArr.sort(function (a, b) {
-    //this function sorts the authors aplphabetically and ignore upper case and lower case
-    let x = a.toLowerCase();
-    let y = b.toLowerCase();
-    if (x < y) {
-      return -1;
+    const authors = [];
+    for (const book of library) {
+        authors.push(book.author);
     }
-    if (y < x) {
-      return 1;
-    }
-    return 0;
-  });
-  for (let j = 0; j < tempArr.length; j++) {
-    let newLine = "\r\n";
-    allAuthors += tempArr[j];
-    allAuthors += newLine;
-  }
-  allAuthors = allAuthors.trim(); //trim all the space in allAuthors
-  let textArea = document.getElementById("information");
-  textArea.innerHTML = allAuthors;
+    authors.sort();
+    return authors;
 }
-/**This function show library ID of the books, sorted
- *
- * @returns{number} display the sorted ID of the books to the html page
- */
-function findIDs() {
-  let allID = "";
-  let tempArr = [];
-  for (let i = 0; i < library.length; i++) {
-    tempArr[i] = library[i].libraryID;
-  }
-  tempArr.sort(function (a, b) {
-    //this function convert library id into number sorts the id from small to large
-    let x = +a;
-    let y = +b;
-    if (x < y) {
-      return -1;
-    }
-    if (y < x) {
-      return 1;
-    }
-    return 0;
-  });
-  for (let j = 0; j < tempArr.length; j++) {
-    if (tempArr[j] !== 0) {
-      //When the user enter an empty author or book title the library ID still count as 0, this will remove all that 0 library ID
-      let newLine = "\r\n";
-      allID += tempArr[j];
-      allID += newLine;
-    }
-  }
 
-  let textArea = document.getElementById("information");
-  textArea.innerHTML = allID;
+/**{
+ * 
+ * @param {Object} book with author title and id
+ * @returns {Object} the same book that added
+ */
+                    function addBook(book) {
+                        library.push(book);
+                        return book;
+
+                    }
+/**
+ * 
+ * @param {string} author is book author
+ * @param {string} title is book title
+ * @param {string} libraryID  is book title
+ * @returns {Object} the new book
+ */
+function makeBook(author, title, libraryID) {
+    const newBook = {
+        author: author,
+        title: title,
+        libraryID: libraryID
+    };
+    return newBook;
 }
+
+
+/**
+ * @returns {Array} of all the authors in library
+ */
+            function findIDs() {
+                const libraryID= [];
+                for (const book of library) {
+                    libraryID.push(book.libraryID);
+                }
+                libraryID.sort();
+                return libraryID;
+            }
 
